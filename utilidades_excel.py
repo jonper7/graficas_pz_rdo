@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def guardar_graficos_en_lote(graficos_info, excel_path):
     """
-    Inserta múltiples gráficos en Excel de una sola vez (mucho más rápido).
+    Inserta múltiples gráficos en Excel (mucho más rápido).
     
     Parámetros:
         graficos_info : Lista de tuplas (png_path, sheet_name, cell, inst_name)
@@ -31,7 +31,7 @@ def guardar_graficos_en_lote(graficos_info, excel_path):
                 
                 ws = wb[sheet_name]
                 
-                # ELIMINAR solo imágenes en la celda específica (con manejo robusto de errores)
+                # ELIMINAR solo imágenes en la celda específica (si existen)
                 col_idx = ord(cell[0].upper()) - ord('A')
                 row_idx = int(''.join(filter(str.isdigit, cell))) - 1
                 

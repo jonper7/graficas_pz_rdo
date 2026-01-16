@@ -79,7 +79,6 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
     # -----------------------------------
     # Serie principal (Elevación Piezométrica)
     # -----------------------------------
-
     ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
 
     serie1, = ax1.plot(
@@ -99,7 +98,7 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
         y_max = datos_validos['elevacion_piezometrica'].max()
         if pd.notna(y_min) and pd.notna(y_max):
             rango = y_max - y_min
-            margen = max(0.5, rango * 0.1)  # 10% del rango o mínimo 0.5
+            margen = max(0.5, rango * 0.1)  # 10% del rango o mínimo 0.5. escala para eje Y
             ax1.set_ylim(y_min - margen, y_max + margen)
             
     # -----------------------------------
@@ -181,7 +180,6 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
     # -----------------------------------
     # Título y formato
     # -----------------------------------
-
     titulo_tabla = tabla.replace('_', '-')
     ax1.set_title(f'Elevación Piezométrica - {titulo_tabla}',
                    fontsize=18,
