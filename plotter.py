@@ -26,7 +26,8 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
     df = df[(df['date_time'] >= fecha_inicio_dt) & (df['date_time'] <= fecha_fin_dt)]
     
     # Filtrar datos válidos
-    datos_validos = df[['date_time', 'elevacion_piezometrica']].dropna()
+    datos_validos = df[['date_time', 'elevacion_piezometrica']].dropna() 
+
     
     if datos_validos.empty:
         print(f"⚠️ No hay datos válidos para graficar en {tabla}")
@@ -81,13 +82,13 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
     # -----------------------------------
 
     ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
-
+    dfv = df.dropna(subset=['elevacion_piezometrica'])
     serie1, = ax1.plot(
-        df['date_time'],
-        df['elevacion_piezometrica'],
+        dfv['date_time'],
+        dfv['elevacion_piezometrica'],
         color='#00008B',
         label='Elevación Piezométrica (msnm)',
-        linewidth=2,
+        linewidth=1.5,
         marker='o' if len(df) == 1 else None,
         markersize=6,
         zorder=3
@@ -169,7 +170,7 @@ def plot_data(df, df_precip, tabla, fecha_inicio, fecha_fin, conexion=None, exce
     rango_dias = max(1, (fecha_max - fecha_min).days)
 
     if rango_dias > 365: intervalo = 60
-    elif rango_dias > 180: intervalo = 30
+    elif rango_dias > 180: intervalo = 20
     elif rango_dias > 90: intervalo = 15
     elif rango_dias > 31: intervalo = 7
     else: intervalo = 1
